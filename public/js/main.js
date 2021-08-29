@@ -3,16 +3,14 @@ const chatMessages = document.querySelector('.chat-messages');
 const userList = document.getElementById('users');
 
 // Get username from URL
-const { username } = Qs.parse(location.search, {
+const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
-
-console.log({username})
 
 const socket = io();
 
 // Join chat
-socket.emit('joinRoom', { username });
+socket.emit('joinRoom', { username, room });
 
 // Get users
 socket.on('roomUsers', ({ users }) => {
