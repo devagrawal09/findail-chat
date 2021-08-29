@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const http = require('http');
 const express = require('express');
@@ -9,6 +10,7 @@ const {
   newUser,
   getIndividualRoomUsers
 } = require('./helpers/userHelper');
+const { generateAnswer } = require('./helpers/botResponse');
 
 const app = express();
 const server = http.createServer(app);
@@ -43,10 +45,15 @@ io.on('connection', socket => {
   });
 
   // Listen for client message
-  socket.on('chatMessage', msg => {
+  socket.on('chatMessage', async msg => {
     const user = getActiveUser(socket.id);
 
     io.to(user.room).emit('message', formatMessage(user.username, msg));
+
+    if(user.room === `bot`) {
+      const botResponse = await generateAnswer(`Question: ${msg}`);
+      io.to(user.room).emit('message', formatMessage(`Call Him Jerry`, botResponse));
+    }
   });
 
   // Runs when client disconnects

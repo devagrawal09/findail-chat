@@ -12,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "got": "^11.8.2",
     "moment": "^2.29.1",
+    "openai-api": "^1.2.5",
     "socket.io": "^3.1.2"
   },
   "devDependencies": {
