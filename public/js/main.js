@@ -1,11 +1,18 @@
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const userList = document.getElementById('users');
+const advisorName = document.getElementById('advisor-name');
 
 // Get username from URL
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
+
+if(room === 'bot') {
+  advisorName.innerText = "JerryBot"
+} else {
+  advisorName.innerText = "Dev Agrawal"
+}
 
 const socket = io();
 
