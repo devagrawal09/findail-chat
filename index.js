@@ -21,8 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // this block will run when the client connects
 io.on('connection', socket => {
-  socket.on('joinRoom', ({ username }) => {
-    const user = newUser(socket.id, username);
+  socket.on('joinRoom', ({ username, room }) => {
+    const user = newUser(socket.id, username, room);
 
     socket.join(user.room);
 
@@ -52,7 +52,7 @@ io.on('connection', socket => {
 
     if(user.room === `bot`) {
       const botResponse = await generateAnswer(`Question: ${msg}`);
-      io.to(user.room).emit('message', formatMessage(`Call Him Jerry`, botResponse));
+      io.to(user.room).emit('message', formatMessage(`JerryBot`, botResponse));
     }
   });
 
@@ -74,6 +74,20 @@ io.on('connection', socket => {
     }
   });
 });
+
+app.get('/advisor', (req, res) => {
+  res.redirect('chat.html?room=advice&username=Dev+Agrawal');
+});
+
+app.get('/join', (req, res) => {
+  res.redirect(`chat.html?room=advice&username=${req.query.username || `Andy`}`);
+});
+
+app.get('/bot', (req, res) => {
+  res.redirect(`chat.html?room=bot&username=${req.query.username || `Andy`}`);
+});
+
+newUser(`bot`, `JerryBot`, `bot`);
 
 const PORT = process.env.PORT || 3000;
 
