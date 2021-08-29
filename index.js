@@ -20,8 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // this block will run when the client connects
 io.on('connection', socket => {
-  socket.on('joinRoom', ({ username, room }) => {
-    const user = newUser(socket.id, username, room);
+  socket.on('joinRoom', ({ username }) => {
+    const user = newUser(socket.id, username);
 
     socket.join(user.room);
 
