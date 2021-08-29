@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@font-face {
+  font-family: FF Clan OT Ultra;
+  src: url('../fonts/FF Clan OT Ultra.otf');
+}
 
 :root {
 	--dark-color-a: #000000;
@@ -15,7 +18,7 @@
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'FF Clan OT Ultra', sans-serif;
 	font-size: 16px;
 	background: var(--light-color);
 	margin: 20px;
@@ -30,6 +33,7 @@ a {
 }
 
 .btn {
+	font-family: 'FF Clan OT Ultra';
 	cursor: pointer;
 	padding: 5px 15px;
 	background: var(--light-color);
