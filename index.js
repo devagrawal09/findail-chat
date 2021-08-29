@@ -80,11 +80,11 @@ app.get('/advisor', (req, res) => {
 });
 
 app.get('/join', (req, res) => {
-  res.redirect(`chat.html?room=advice&username=${req.query.username || `Andy`}`);
+  res.redirect(`chat.html?room=advice&username=${req.query.username || `You`}`);
 });
 
 app.get('/bot', (req, res) => {
-  res.redirect(`chat.html?room=bot&username=${req.query.username || `Andy`}`);
+  res.redirect(`chat.html?room=bot&username=${req.query.username || `You`}`);
 });
 
 newUser(`bot`, `JerryBot`, `bot`);
